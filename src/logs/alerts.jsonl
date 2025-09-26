@@ -13,3 +13,9 @@
 {"timestamp": 1758861337.6705449, "node": "node2", "alert_type": "sensitive_keyword", "severity": "medium", "evidence": "{'type': 'data', 'payload': 'my password is secret123'}", "fsm_state": "suspicious"}
 {"timestamp": 1758861663.240127, "node": "node2", "alert_type": "sql_injection", "severity": "high", "evidence": "{'type': 'login', 'payload': \"username=admin' OR '1'='1'\"}", "fsm_state": "normal"}
 {"timestamp": 1758861663.7459662, "node": "node2", "alert_type": "sensitive_keyword", "severity": "medium", "evidence": "{'type': 'data', 'payload': 'my password is secret123'}", "fsm_state": "suspicious"}
+{"timestamp": 1758892060.510584, "node": "node2", "type": "message_sql_injection", "severity": "high", "evidence": "{'type': 'login', 'payload': \"username=admin' OR '1'='1'\"}"}
+{"timestamp": 1758892061.0167308, "node": "node2", "type": "message_sensitive_keyword", "severity": "medium", "evidence": "{'type': 'data', 'payload': 'my password is secret123'}"}
+{"timestamp": 1758892062.0191019, "target": "127.0.0.1", "port": 22, "service": "ssh", "product": "OpenSSH", "version": "10.0", "scripts": {}, "severity": "low", "reasons": ["Open service detected"], "recommendations": ["Enforce key-based auth, disable password auth, keep OpenSSH updated."]}
+{"timestamp": 1758892121.765614, "node": "node2", "type": "message_sql_injection", "severity": "high", "evidence": "{'type': 'login', 'payload': \"username=admin' OR '1'='1'\"}"}
+{"timestamp": 1758892122.271522, "node": "node2", "type": "message_sensitive_keyword", "severity": "medium", "evidence": "{'type': 'data', 'payload': 'my password is secret123'}"}
+{"timestamp": 1758892123.2771149, "target": "127.0.0.1", "port": 22, "service": "ssh", "product": "OpenSSH", "version": "10.0", "scripts": {}, "severity": "low", "reasons": ["Open service detected"], "recommendations": ["Enforce key-based auth, disable password auth, keep OpenSSH updated."]}

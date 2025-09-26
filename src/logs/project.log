@@ -35,3 +35,13 @@
 2025-09-26 10:11:03,241 INFO: [IDS] Saved raw payload to /Users/spidey/Downloads/final_project/final_project/src/pcaps/sql_injection_2025-09-26_10-11-03.bin
 2025-09-26 10:11:03,746 INFO: [IDS] Sensitive keyword detected on node2
 2025-09-26 10:11:03,747 INFO: [IDS] Saved raw payload to /Users/spidey/Downloads/final_project/final_project/src/pcaps/sensitive_keyword_2025-09-26_10-11-03.bin
+2025-09-26 18:37:40,004 INFO: [IDS] Normal traffic on node2. FSM state: normal
+2025-09-26 18:37:40,510 INFO: [IDS] SQL injection pattern detected on node2
+2025-09-26 18:37:41,016 INFO: [IDS] Sensitive keyword detected on node2
+2025-09-26 18:37:42,018 INFO: [NmapDetector] Starting scan on 127.0.0.1 (ports=1-1024)
+2025-09-26 18:37:52,455 INFO: [NmapDetector] Alert: 127.0.0.1:22 ssh severity=low
+2025-09-26 18:38:41,259 INFO: [IDS] Normal traffic on node2. FSM state: normal
+2025-09-26 18:38:41,765 INFO: [IDS] SQL injection pattern detected on node2
+2025-09-26 18:38:42,271 INFO: [IDS] Sensitive keyword detected on node2
+2025-09-26 18:38:43,276 INFO: [NmapDetector] Starting scan on 127.0.0.1 (ports=1-1024)
+2025-09-26 18:38:51,326 INFO: [NmapDetector] Alert: 127.0.0.1:22 ssh severity=low
