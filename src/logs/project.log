@@ -1,0 +1,37 @@
+2025-09-25 09:35:29,707 INFO: [IDS] Normal traffic on node2
+2025-09-25 09:35:30,209 INFO: [IDS] SQL injection pattern detected on node2
+2025-09-25 09:35:30,211 INFO: [IDS] Saved raw payload to D:\final_project\final_project\src\pcaps\sql_injection_2025-09-25_09-35-30.bin
+2025-09-25 09:35:30,711 INFO: [IDS] Sensitive keyword detected on node2
+2025-09-25 09:35:30,712 INFO: [IDS] Saved raw payload to D:\final_project\final_project\src\pcaps\sensitive_keyword_2025-09-25_09-35-30.bin
+2025-09-25 09:43:06,703 INFO: [IDS] SQL injection pattern detected on t_node
+2025-09-25 09:43:06,704 INFO: [IDS] Saved raw payload to D:\final_project\final_project\src\pcaps\sql_injection_2025-09-25_09-43-06.bin
+2025-09-25 09:48:22,739 INFO: [IDS] Normal traffic on node2
+2025-09-25 09:48:23,240 INFO: [IDS] SQL injection pattern detected on node2
+2025-09-25 09:48:23,272 INFO: [IDS] Saved raw payload to D:\final_project\final_project\src\pcaps\sql_injection_2025-09-25_09-48-23.bin
+2025-09-25 09:48:23,742 INFO: [IDS] Sensitive keyword detected on node2
+2025-09-25 09:48:23,774 INFO: [IDS] Saved raw payload to D:\final_project\final_project\src\pcaps\sensitive_keyword_2025-09-25_09-48-23.bin
+2025-09-25 10:41:33,231 INFO: [IDS] Normal traffic on node2
+2025-09-25 10:41:33,733 INFO: [IDS] SQL injection pattern detected on node2
+2025-09-25 10:41:33,738 INFO: [IDS] Saved raw payload to D:\final_project\final_project\src\pcaps\sql_injection_2025-09-25_10-41-33.bin
+2025-09-25 10:41:34,234 INFO: [IDS] Sensitive keyword detected on node2
+2025-09-25 10:41:34,236 INFO: [IDS] Saved raw payload to D:\final_project\final_project\src\pcaps\sensitive_keyword_2025-09-25_10-41-34.bin
+2025-09-25 10:42:08,355 INFO: [IDS] Normal traffic on node2
+2025-09-25 10:42:08,857 INFO: [IDS] SQL injection pattern detected on node2
+2025-09-25 10:42:08,858 INFO: [IDS] Saved raw payload to D:\final_project\final_project\src\pcaps\sql_injection_2025-09-25_10-42-08.bin
+2025-09-25 10:42:09,359 INFO: [IDS] Sensitive keyword detected on node2
+2025-09-25 10:42:09,360 INFO: [IDS] Saved raw payload to D:\final_project\final_project\src\pcaps\sensitive_keyword_2025-09-25_10-42-09.bin
+2025-09-26 10:00:30,037 INFO: [IDS] Normal traffic on node2
+2025-09-26 10:00:30,543 INFO: [IDS] SQL injection pattern detected on node2
+2025-09-26 10:00:30,545 INFO: [IDS] Saved raw payload to /Users/spidey/Downloads/final_project/final_project/src/pcaps/sql_injection_2025-09-26_10-00-30.bin
+2025-09-26 10:00:31,049 INFO: [IDS] Sensitive keyword detected on node2
+2025-09-26 10:00:31,050 INFO: [IDS] Saved raw payload to /Users/spidey/Downloads/final_project/final_project/src/pcaps/sensitive_keyword_2025-09-26_10-00-31.bin
+2025-09-26 10:05:36,660 INFO: [IDS] Normal traffic on node2
+2025-09-26 10:05:37,166 INFO: [IDS] SQL injection pattern detected on node2
+2025-09-26 10:05:37,167 INFO: [IDS] Saved raw payload to /Users/spidey/Downloads/final_project/final_project/src/pcaps/sql_injection_2025-09-26_10-05-37.bin
+2025-09-26 10:05:37,670 INFO: [IDS] Sensitive keyword detected on node2
+2025-09-26 10:05:37,671 INFO: [IDS] Saved raw payload to /Users/spidey/Downloads/final_project/final_project/src/pcaps/sensitive_keyword_2025-09-26_10-05-37.bin
+2025-09-26 10:11:02,734 INFO: [IDS] Normal traffic on node2
+2025-09-26 10:11:03,240 INFO: [IDS] SQL injection pattern detected on node2
+2025-09-26 10:11:03,241 INFO: [IDS] Saved raw payload to /Users/spidey/Downloads/final_project/final_project/src/pcaps/sql_injection_2025-09-26_10-11-03.bin
+2025-09-26 10:11:03,746 INFO: [IDS] Sensitive keyword detected on node2
+2025-09-26 10:11:03,747 INFO: [IDS] Saved raw payload to /Users/spidey/Downloads/final_project/final_project/src/pcaps/sensitive_keyword_2025-09-26_10-11-03.bin
