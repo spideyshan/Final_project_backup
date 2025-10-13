@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>P2P IDS Dashboard — Advanced UI</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome for icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body class="bg-light">
+
+<nav class="navbar navbar-dark bg-dark sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-brand d-flex align-items-center" href="#">
+      <i class="fa-solid fa-shield-halved me-2"></i>
+      P2P IDS Dashboard
+    </a>
+    <div class="d-flex gap-2">
+      <button id="btn-scan" class="btn btn-outline-light btn-sm"><i class="fa-solid fa-magnifying-glass"></i> Run Nmap Scan</button>
+      <button id="btn-refresh" class="btn btn-outline-light btn-sm"><i class="fa-solid fa-arrows-rotate"></i> Refresh</button>
+    </div>
+  </div>
+</nav>
+
+<main class="container-fluid py-3">
+  <div class="row gx-3">
+    <!-- LEFT: Node list & FSM -->
+    <div class="col-xl-3 col-lg-4">
+      <div class="card mb-3 shadow-sm">
+        <div class="card-body">
+          <div class="d-flex align-items-center mb-2">
+            <h6 class="mb-0 me-auto">Nodes</h6>
+            <input id="node-search" class="form-control form-control-sm ms-2" placeholder="Search nodes..." style="width:140px;">
+          </div>
+          <div id="nodes-container" class="list-group list-group-flush small" style="max-height:420px; overflow:auto;">
+            <!-- nodes inserted here -->
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-3 shadow-sm">
+        <div class="card-header">FSM State (Live)</div>
+        <div class="card-body">
+          <div class="mb-2"><strong>Selected:</strong> <span id="fsm-current-node">—</span></div>
+          <div class="mb-2"><strong>State:</strong> <span id="fsm-current-state" class="badge bg-secondary">—</span></div>
+          <div><strong>Last event:</strong> <div id="fsm-last-event" class="text-muted small">—</div></div>
+        </div>
+      </div>
+
+      <div class="card mb-3 shadow-sm">
+        <div class="card-header">Vulnerability Summary</div>
+        <div class="card-body">
+          <div class="d-flex align-items-center mb-2">
+            <div class="me-auto"><small class="text-muted">Total findings</small></div>
+            <div id="vuln-total" class="fw-bold">0</div>
+          </div>
+          <div class="progress mb-2" style="height:12px;">
+            <div id="vuln-progress" class="progress-bar bg-danger" role="progressbar" style="width:0%"></div>
+          </div>
+          <div class="small text-muted">Severity breakdown</div>
+          <div class="d-flex gap-2 mt-2">
+            <span class="badge bg-success" id="sev-low">Low: 0</span>
+            <span class="badge bg-warning text-dark" id="sev-med">Med: 0</span>
+            <span class="badge bg-danger" id="sev-high">High: 0</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CENTER: Alerts & details -->
+    <div class="col-xl-6 col-lg-8">
+      <div class="card mb-3 shadow-sm">
+        <div class="card-header d-flex align-items-center">
+          <h6 class="mb-0 me-auto">Live Alerts</h6>
+          <small id="alerts-last-update" class="text-muted"></small>
+        </div>
+        <div class="card-body p-0">
+          <div class="table-responsive" style="max-height:360px; overflow:auto;">
+            <table id="alerts-table" class="table table-hover mb-0 small">
+              <thead class="table-light sticky-top">
+                <tr><th style="width:160px">Time</th><th>Node</th><th>Type</th><th style="width:100px">Severity</th></tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-3 shadow-sm">
+        <div class="card-header">Selected Alert Detail</div>
+        <div class="card-body">
+          <pre id="alert-detail" class="bg-dark text-light p-3 rounded" style="min-height:140px;">Click an alert to view details</pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: Charts & Node vulnerabilities -->
+    <div class="col-xl-3">
+      <div class="card mb-3 shadow-sm">
+        <div class="card-header">Attacks Over Time</div>
+        <div class="card-body">
+          <canvas id="attackChart" width="300" height="180"></canvas>
+        </div>
+      </div>
+
+      <div class="card mb-3 shadow-sm">
+        <div class="card-header">Vulnerability Map</div>
+        <div class="card-body" style="min-height:200px;">
+          <canvas id="vulnChart" width="300" height="180"></canvas>
+        </div>
+      </div>
+
+      <div class="card mb-3 shadow-sm">
+        <div class="card-header">Node Vulnerabilities</div>
+        <div class="card-body small" id="node-vulns" style="max-height:300px; overflow:auto;">
+          <!-- vulnerability list populated by JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Alert detail modal (bootstrap) -->
+<div class="modal fade" id="alertModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Alert Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <pre id="modal-alert-detail" class="bg-dark text-light p-3 rounded"></pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toasts -->
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index:1080">
+  <div id="toast-container"></div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- App JS -->
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
+
+
+

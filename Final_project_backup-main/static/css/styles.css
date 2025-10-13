@@ -1,0 +1,102 @@
+body {
+  background: #f5f7fb;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+.card-header {
+  font-weight: 600;
+}
+
+#nodes-container .node-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem;
+  border-bottom: 1px dashed rgba(0,0,0,.03);
+}
+
+.node-badge {
+  min-width: 70px;
+  text-align: center;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.node-online { background: #28a745; }
+.node-warning { background: #ffc107; color: #000; }
+.node-offline { background: #6c757d; }
+
+.fsm-visual {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 6px;
+  margin-bottom: .5rem;
+  font-weight:600;
+}
+.fsm-visual .state {
+  padding: .35rem .6rem;
+  border-radius: 6px;
+  background: #e9ecef;
+  color: #333;
+  width: 100%;
+  text-align:center;
+}
+.fsm-visual .state.active {
+  background: #0d6efd;
+  color: #fff;
+}
+.fsm-visual .arrow { width: 10px; text-align:center; color:#333; font-weight:700; }
+
+#alerts-table tbody tr { cursor:pointer; }
+#alert-detail {
+  background: #0f1720;
+  color: #e6eef8;
+  border-radius: 6px;
+  padding: .7rem;
+  height: 150px;
+  overflow:auto;
+}
+.pre-scrollable { white-space: pre-wrap; word-wrap: break-word; }
+
+/* small screens */
+@media (max-width: 992px) {
+  .fsm-visual { flex-wrap:wrap; gap:8px; }
+  .fsm-visual .arrow { display:none; }
+}
+
+/* static/css/styles.css - small UI improvements */
+body { font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; }
+.node-card { display:flex; justify-content:space-between; padding:10px 12px; border-bottom:1px solid #f0f0f0; }
+.node-card:hover { background:#f8fafc; }
+.node-status { font-size:0.8rem; padding:4px 8px; border-radius:12px; }
+.badge-online { background:#198754; color:white; }
+.badge-suspicious { background:#ffc107; color:#212529; }
+.badge-alert { background:#dc3545; color:white; }
+.bg-dark-pre { background:#0b1419; color:#cfe6f0; padding:12px; border-radius:6px; }
+
+
+/* static/css/styles.css - presentation polish */
+body { font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; }
+
+.node-card {
+  padding: 12px 14px;
+  border-bottom: 1px solid #eee;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.node-card:hover { background: #f8fbff; }
+
+.badge-status { font-size:0.72rem; padding:0.35rem 0.5rem; border-radius:0.375rem; }
+.badge-online { background:#2dd4bf; color:#052e2a; }
+.badge-suspicious { background:#facc15; color:#3a2d00; }
+.badge-alert { background:#fb7185; color:#3a080e; }
+.badge-offline { background:#cbd5e1; color:#0f172a; }
+
+#node-vulns ul { padding-left:1rem; margin-top:6px; }
+#node-vulns li { margin-bottom:6px; }
+
+.table thead.sticky-top { position: sticky; top: 0; z-index: 1; }
