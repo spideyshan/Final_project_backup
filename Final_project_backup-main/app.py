@@ -24,7 +24,7 @@ app = Flask(__name__)
 NODES = [
     {"name": "node-A", "ip": "127.0.0.1", "status": "online", "state": "normal",
      "open_ports": 0, "vulnerabilities": [], "last_event": "none"},
-    {"name": "node-B", "ip": "10.0.0.2", "status": "online", "state": "normal",
+    {"name": "node-B", "ip": "10.15.13.14", "status": "online", "state": "normal",
      "open_ports": 0, "vulnerabilities": [], "last_event": "none"},
     {"name": "node-C", "ip": "10.0.0.3", "status": "online", "state": "normal",
      "open_ports": 0, "vulnerabilities": [], "last_event": "none"},
@@ -37,7 +37,6 @@ ALERTS = []
 # ==============================================================
 # Nmap Setup
 # ==============================================================
-
 try:
     nm = nmap.PortScanner()
     NM_AVAILABLE = True
@@ -49,7 +48,6 @@ except Exception as e:
 # ==============================================================
 # Vulnerability Hint Mapping
 # ==============================================================
-
 SERVICE_CVE_HINTS = {
     'http': [{'cve': 'CVE-2023-12345', 'desc': 'Outdated HTTP server version'}],
     'ssh': [{'cve': None, 'desc': 'SSH open — check version and keys'}],
@@ -87,7 +85,6 @@ def infer_vulns_from_scan(open_ports):
 # ==============================================================
 # Utility: Run Nmap Scan
 # ==============================================================
-
 def run_nmap_scan(ip, ports='1-1024'):
     """Run Nmap scan for a given IP"""
     if not NM_AVAILABLE:
@@ -114,9 +111,54 @@ def run_nmap_scan(ip, ports='1-1024'):
 
 
 # ==============================================================
+# Background Scanner Thread
+# ==============================================================
+def do_scan_and_update_single(ip):
+    """Perform scan for one IP and update node info"""
+    app.logger.info(f"[SCAN_THREAD] Scanning {ip} ...")
+    res = run_nmap_scan(ip)
+    app.logger.info(f"[SCAN_THREAD] {ip} → {len(res.get('open', []))} open ports")
+
+    for node in NODES:
+        if node['ip'] == ip:
+            node['open_ports'] = len(res.get('open', []))
+            node['vulnerabilities'] = infer_vulns_from_scan(res.get('open', []))
+            node['last_event'] = f"Nmap scan finished at {datetime.utcnow().isoformat()}"
+            if node['vulnerabilities']:
+                ALERTS.insert(0, {
+                    "time": datetime.utcnow().isoformat(),
+                    "node": node['name'],
+                    "type": "Port Scan Result",
+                    "severity": "Low",
+                    "details": f"Found {len(node['vulnerabilities'])} issues"
+                })
+            break
+
+
+def background_scanner(interval_seconds=60):
+    """Continuously scan all nodes periodically"""
+    app.logger.info("[BG_SCANNER] Background scanner started")
+    while True:
+        for node in NODES:
+            try:
+                do_scan_and_update_single(node['ip'])
+            except Exception as e:
+                app.logger.exception(f"[BG_SCANNER] Error scanning {node['ip']}: {e}")
+            time.sleep(0.3)
+        app.logger.info("[BG_SCANNER] Sleeping before next cycle...")
+        time.sleep(interval_seconds)
+
+
+def start_scanner_thread(interval_seconds=60):
+    """Start the background scanning thread"""
+    t = threading.Thread(target=lambda: background_scanner(interval_seconds), daemon=True)
+    t.start()
+    app.logger.info("[MAIN] Started background scanner thread")
+
+
+# ==============================================================
 # FSM (Finite State Machine) Simulation
 # ==============================================================
-
 def update_node_state(ip, new_state, event=None):
     for node in NODES:
         if node['ip'] == ip:
@@ -147,7 +189,6 @@ def internal_fsm():
 # ==============================================================
 # Routes
 # ==============================================================
-
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -176,47 +217,24 @@ def api_summary():
 
 
 # ==============================================================
-# New /api/scan - main Nmap scanning route
+# Main Nmap Scanning Endpoint
 # ==============================================================
-
 @app.route('/api/scan', methods=['POST'])
 def api_scan():
     data = request.get_json(silent=True) or {}
     target = data.get('ip')
 
-    def do_scan_and_update(ip):
-        app.logger.info(f"[SCAN] Scanning {ip} ...")
-        res = run_nmap_scan(ip)
-        app.logger.info(f"[SCAN] {ip} → {len(res.get('open', []))} open ports found")
-
-        for node in NODES:
-            if node['ip'] == ip:
-                node['open_ports'] = len(res.get('open', []))
-                node['vulnerabilities'] = infer_vulns_from_scan(res.get('open', []))
-                node['last_event'] = f"Nmap scan finished at {datetime.utcnow().isoformat()}"
-                if node['vulnerabilities']:
-                    ALERTS.insert(0, {
-                        "time": datetime.utcnow().isoformat(),
-                        "node": node['name'],
-                        "type": "Port Scan Result",
-                        "severity": "Low",
-                        "details": f"Found {len(node['vulnerabilities'])} issues"
-                    })
-
     targets = [target] if target else [n['ip'] for n in NODES]
-
-    # Run scans sequentially (simpler + predictable for demo)
     for ip in targets:
-        do_scan_and_update(ip)
+        do_scan_and_update_single(ip)
         time.sleep(0.3)
 
     return jsonify({"status": "scan completed"}), 200
 
 
 # ==============================================================
-# DEBUG: Direct manual scan endpoint (for testing)
+# DEBUG: Direct manual scan endpoint
 # ==============================================================
-
 @app.route('/api/scan_now', methods=['POST'])
 def api_scan_now():
     data = request.get_json(silent=True) or {}
@@ -226,44 +244,11 @@ def api_scan_now():
     app.logger.info(f"[SCAN_NOW] Done {ip}, ports={len(res.get('open', []))}")
     return jsonify({"ok": True, "scan": res})
 
-@app.route('/api/scan', methods=['POST'])
-def api_scan():
-    data = request.get_json(silent=True) or {}
-    target = data.get('ip')
-    def do_scan_and_update(ip):
-        app.logger.info(f"[API_SCAN] scanning {ip}")
-        res = run_nmap_scan(ip)
-        app.logger.info(f"[API_SCAN] found {len(res.get('open', []))} for {ip}")
-        for node in NODES:
-            if node['ip'] == ip:
-                node['open_ports'] = len(res.get('open', []))
-                node['vulnerabilities'] = infer_vulns_from_scan(res.get('open', []))
-                node['last_event'] = f"Nmap scan completed at {datetime.utcnow().isoformat()}"
-                if node['vulnerabilities']:
-                    ALERTS.insert(0, {
-                        "time": datetime.utcnow().isoformat(),
-                        "node": node['name'],
-                        "type": "Port Scan Result",
-                        "severity": "Low",
-                        "details": f"Found {len(node['vulnerabilities'])} findings on ports: " + ", ".join(str(v['port']) for v in node['vulnerabilities'])
-                    })
-                app.logger.info(f"[API_SCAN] updated node {node['name']} open_ports={node['open_ports']}")
-    targets = [target] if target else [n['ip'] for n in NODES]
-    for ip in targets:
-        try:
-            do_scan_and_update(ip)
-        except Exception as e:
-            app.logger.exception(f"[API_SCAN] error scanning {ip}: {e}")
-        time.sleep(0.3)
-    return jsonify({"status":"scan completed"}), 200
-
-
 
 # ==============================================================
 # Main Entry
 # ==============================================================
-
 if __name__ == '__main__':
+    start_scanner_thread(interval_seconds=60)
     print("Nmap available:", NM_AVAILABLE)
     app.run(host='0.0.0.0', port=5000, debug=True)
-
