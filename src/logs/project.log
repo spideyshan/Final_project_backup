@@ -35,3 +35,64 @@
 2025-09-26 10:11:03,241 INFO: [IDS] Saved raw payload to /Users/spidey/Downloads/final_project/final_project/src/pcaps/sql_injection_2025-09-26_10-11-03.bin
 2025-09-26 10:11:03,746 INFO: [IDS] Sensitive keyword detected on node2
 2025-09-26 10:11:03,747 INFO: [IDS] Saved raw payload to /Users/spidey/Downloads/final_project/final_project/src/pcaps/sensitive_keyword_2025-09-26_10-11-03.bin
+2025-09-26 18:37:40,004 INFO: [IDS] Normal traffic on node2. FSM state: normal
+2025-09-26 18:37:40,510 INFO: [IDS] SQL injection pattern detected on node2
+2025-09-26 18:37:41,016 INFO: [IDS] Sensitive keyword detected on node2
+2025-09-26 18:37:42,018 INFO: [NmapDetector] Starting scan on 127.0.0.1 (ports=1-1024)
+2025-09-26 18:37:52,455 INFO: [NmapDetector] Alert: 127.0.0.1:22 ssh severity=low
+2025-09-26 18:38:41,259 INFO: [IDS] Normal traffic on node2. FSM state: normal
+2025-09-26 18:38:41,765 INFO: [IDS] SQL injection pattern detected on node2
+2025-09-26 18:38:42,271 INFO: [IDS] Sensitive keyword detected on node2
+2025-09-26 18:38:43,276 INFO: [NmapDetector] Starting scan on 127.0.0.1 (ports=1-1024)
+2025-09-26 18:38:51,326 INFO: [NmapDetector] Alert: 127.0.0.1:22 ssh severity=low
+2025-09-27 10:46:30,450 INFO: [IDS] Normal traffic on node2. FSM state: normal
+2025-09-27 10:46:30,956 INFO: [IDS] SQL injection pattern detected on node2
+2025-09-27 10:46:31,461 INFO: [IDS] Sensitive keyword detected on node2
+2025-09-27 10:46:32,464 INFO: [NmapDetector] Starting scan on 127.0.0.1 (ports=1-1024)
+2025-09-27 10:47:11,607 INFO: [NmapDetector] Alert: 127.0.0.1:22 ssh severity=low
+2025-09-27 10:47:11,608 INFO: [NmapDetector] Alert: 127.0.0.1:631 ipp severity=high
+2025-09-27 11:30:47,176 INFO: [IDS] Normal traffic on node2. FSM state: normal
+2025-09-27 11:30:47,682 INFO: [IDS] SQL injection pattern detected on node2
+2025-09-27 11:30:48,188 INFO: [IDS] Sensitive keyword detected on node2
+2025-09-27 11:30:49,193 INFO: [NmapDetector] Starting scan on 127.0.0.1 (ports=1-1024)
+2025-09-27 11:30:57,462 INFO: [NmapDetector] Alert: 127.0.0.1:22 ssh severity=low
+2025-09-27 18:10:54,748 INFO: [IDS] Normal traffic on node2. FSM state: normal
+2025-09-27 18:12:22,574 INFO: [IDS] SQL injection pattern detected on node2
+2025-09-27 18:12:25,759 INFO: [IDS] SQL injection pattern detected on node2
+2025-09-27 18:12:27,040 INFO: [NmapDetector] Starting scan on 127.0.0.1 (ports=1-1024)
+2025-09-27 18:12:27,926 INFO: [NmapDetector] Starting scan on 127.0.0.1 (ports=1-1024)
+2025-09-27 18:12:28,295 INFO: [NmapDetector] Starting scan on 127.0.0.1 (ports=1-1024)
+2025-09-27 18:12:28,550 INFO: [NmapDetector] Starting scan on 127.0.0.1 (ports=1-1024)
+2025-09-27 18:12:28,736 INFO: [NmapDetector] Starting scan on 127.0.0.1 (ports=1-1024)
+2025-09-27 18:12:28,918 INFO: [NmapDetector] Starting scan on 127.0.0.1 (ports=1-1024)
+2025-09-27 18:12:36,582 INFO: [NmapDetector] Alert: 127.0.0.1:22 ssh severity=low
+2025-09-27 18:12:36,589 INFO: [IDS] SQL injection pattern detected on node2
+2025-09-27 18:12:36,590 INFO: [IDS] SQL injection pattern detected on node2
+2025-09-27 18:12:36,591 INFO: [IDS] SQL injection pattern detected on node2
+2025-09-27 18:12:36,592 INFO: [IDS] SQL injection pattern detected on node2
+2025-09-27 18:12:36,597 INFO: [NmapDetector] Alert: 127.0.0.1:22 ssh severity=low
+2025-09-27 18:12:36,646 INFO: [NmapDetector] Alert: 127.0.0.1:22 ssh severity=low
+2025-09-27 18:12:36,695 INFO: [NmapDetector] Alert: 127.0.0.1:22 ssh severity=low
+2025-09-27 18:12:36,707 INFO: [NmapDetector] Alert: 127.0.0.1:22 ssh severity=low
+2025-09-27 18:12:36,833 INFO: [NmapDetector] Alert: 127.0.0.1:22 ssh severity=low
+2025-09-27 18:12:54,471 INFO: [IDS] SQL injection pattern detected on node2
+2025-09-27 18:12:54,791 INFO: [IDS] SQL injection pattern detected on node2
+2025-09-27 18:15:59,658 INFO: [IDS] Normal traffic on node2. FSM state: alert
+2025-09-27 18:16:01,078 INFO: [IDS] Normal traffic on node2. FSM state: alert
+2025-09-27 18:16:05,955 INFO: [IDS] SQL injection pattern detected on node2
+2025-09-27 18:16:08,789 INFO: [IDS] SQL injection pattern detected on node2
+2025-09-27 18:16:10,534 INFO: [IDS] Sensitive keyword detected on node2
+2025-09-27 18:16:12,742 INFO: [NmapDetector] Starting scan on 127.0.0.1 (ports=1-1024)
+2025-09-27 18:16:20,618 INFO: [NmapDetector] Alert: 127.0.0.1:22 ssh severity=low
+2025-09-27 18:19:57,060 INFO: [IDS] Sensitive keyword detected on node2
+2025-09-27 18:19:59,070 INFO: [IDS] Sensitive keyword detected on node2
+2025-09-27 18:20:00,706 INFO: [IDS] Sensitive keyword detected on node2
+2025-09-27 18:20:01,870 INFO: [IDS] Sensitive keyword detected on node2
+2025-09-27 18:20:03,279 INFO: [IDS] SQL injection pattern detected on node2
+2025-09-27 18:20:05,150 INFO: [IDS] Normal traffic on node2. FSM state: alert
+2025-09-27 18:20:05,714 INFO: [IDS] Normal traffic on node2. FSM state: alert
+2025-09-27 18:20:05,901 INFO: [IDS] Normal traffic on node2. FSM state: alert
+2025-09-27 18:20:06,079 INFO: [IDS] Normal traffic on node2. FSM state: alert
+2025-09-27 18:20:06,286 INFO: [IDS] Normal traffic on node2. FSM state: alert
+2025-09-27 18:20:06,455 INFO: [IDS] Normal traffic on node2. FSM state: alert
+2025-09-27 18:20:06,696 INFO: [IDS] Normal traffic on node2. FSM state: alert
